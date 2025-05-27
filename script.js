@@ -12,11 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Extract URL from background-image style
       const bgImage = box.style.backgroundImage;
-      const imageUrl = bgImage.slice(5, -2); // strips url("...")
-
-      modalTitle.textContent = title;
-      modalDescription.textContent = description;
-      modalImage.src = imageUrl;
+let imageUrl = "";
+const match = bgImage.match(/url\((['"]?)(.*?)\1\)/);
+if (match) {
+  imageUrl = match[2];
+}
+modalTitle.textContent = title;
+modalDescription.textContent = description;
+modalImage.src = imageUrl;
 
       modal.classList.remove("hidden");
     });
