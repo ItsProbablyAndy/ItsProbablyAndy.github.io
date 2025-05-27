@@ -167,31 +167,6 @@ footer a {
   height: 100vh;
 }
 
-.landing-box {
-  flex: 1;
-  min-width: 25%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.3s ease;
-  text-decoration: none;
-}
-
-.landing-box:hover {
-  transform: scale(1.02);
-}
-
-.landing-box span {
-  font-size: 1.5em;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 1em;
-  color: white;
-  border-radius: 10px;
-}
-
 .landing-container {
   display: flex;
   height: 100vh;
