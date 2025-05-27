@@ -1,40 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const boxes = document.querySelectorAll(".play-box");
+  // Modal Elements
   const modal = document.getElementById("modal");
   const modalTitle = document.getElementById("modal-title");
   const modalDescription = document.getElementById("modal-description");
   const modalClose = document.getElementById("modal-close");
 
-  // Example game data (optional enhancement)
-  const gameData = [
-    {
-      title: "Fear the Spotlight",
-      description: "A creepy school horror game where you investigate a haunting in the drama department."
-    },
-    {
-      title: "Game 2",
-      description: "Description and details for Game 2."
-    },
-    {
-      title: "Game 3",
-      description: "Testing notes and feedback details for Game 3."
-    }
-  ];
-
-  boxes.forEach((box, index) => {
+  // Box Click Handler
+  document.querySelectorAll(".play-box").forEach(box => {
     box.addEventListener("click", () => {
-      const game = gameData[index];
-      modalTitle.textContent = game.title;
-      modalDescription.textContent = game.description;
+      const title = box.getAttribute("data-title");
+      const description = box.getAttribute("data-description");
+
+      modalTitle.textContent = title || "No Title";
+      modalDescription.textContent = description || "No Description";
       modal.classList.remove("hidden");
     });
   });
 
+  // Close Modal on X click
   modalClose.addEventListener("click", () => {
     modal.classList.add("hidden");
   });
 
-  // Optional: close modal on background click
+  // Close Modal on background click
   modal.addEventListener("click", (e) => {
     if (e.target === modal) {
       modal.classList.add("hidden");
@@ -48,10 +36,3 @@ document.addEventListener("DOMContentLoaded", () => {
     navMenu.classList.toggle("active");
   });
 });
-
-  const hamburger = document.querySelector(".hamburger");
-  const navMenu = document.querySelector("nav");
-
-  hamburger.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
-  });
