@@ -82,15 +82,34 @@ nav a:hover {
 }
 
 footer {
-  background: #1f1f1f;
-  padding: 1em;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  background: #111;
+  align-items: center;
 }
 
 footer a {
+  display: flex;
+  align-items: center;
   color: white;
-  margin: 0 10px;
   text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+footer a:hover {
+  transform: scale(1.2);
+}
+
+footer i.fa-twitter {
+  font-size: 32px;
+}
+
+footer img.bluesky-icon {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 .about-contact {
