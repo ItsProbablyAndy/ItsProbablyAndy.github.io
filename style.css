@@ -191,3 +191,35 @@ footer a {
   color: white;
   border-radius: 10px;
 }
+
+.landing-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+}
+
+.landing-box {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
+  text-decoration: none;
+}
+
+.landing-box:hover {
+  transform: scale(1.02);
+}
+
+.landing-box span {
+  font-size: 1.5em;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1em 2em;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+}
+
