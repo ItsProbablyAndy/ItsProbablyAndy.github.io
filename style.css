@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -58,29 +59,6 @@ nav a:hover {
   }
 }
 
-.section-link {
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.5s ease;
-}
-
-.section-link:hover {
-  transform: scale(1.02);
-}
-
-.section-link a {
-  font-size: 2em;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 1em 2em;
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
-}
-
 footer {
   display: flex;
   justify-content: center;
@@ -112,22 +90,6 @@ footer img.bluesky-icon {
   display: block;
 }
 
-.about-contact {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2em;
-  padding: 2em;
-  justify-content: space-around;
-}
-
-.about-box, .contact-box {
-  flex: 1;
-  min-width: 300px;
-  background: #2a2a2a;
-  padding: 2em;
-  border-radius: 8px;
-}
-
 .playtesting-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -139,82 +101,9 @@ footer img.bluesky-icon {
   background-size: cover;
   background-position: center;
   height: 200px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-  transition: transform 0.3s, height 0.5s;
-  overflow: hidden;
-}
-
-.play-box.expanded {
-  height: auto;
-  background-color: #2a2a2a;
-  flex-direction: column;
-  padding: 1em;
-}
-
-.projects, .writing {
-  padding: 2em;
-}
-
-.project-box, .writing-box {
-  display: flex;
-  flex-wrap: wrap;
-  background: #2a2a2a;
-  margin-bottom: 1em;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.project-box img, .writing-box img {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-}
-
-.project-info, .writing-info {
-  padding: 1em;
-  flex: 1;
-}
-
-.landing-grid {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 100vh;
-}
-
-.landing-container {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  margin: 0;
-}
-
-.landing-box {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.3s ease;
-  text-decoration: none;
-}
-
-.landing-box:hover {
-  transform: scale(1.02);
-}
-
-.landing-box span {
-  font-size: 1.5em;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 1em 2em;
-  color: white;
-  border-radius: 10px;
-  text-align: center;
+  transition: transform 0.3s;
+  border: 2px solid #333;
 }
 
 .modal {
@@ -242,32 +131,22 @@ footer img.bluesky-icon {
   width: 90%;
   border-radius: 10px;
   position: relative;
+  text-align: center;
 }
 
 #modal-close {
   position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  font-size: 1.5rem;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
   cursor: pointer;
 }
 
 .modal-banner {
+  display: block;
   width: 100%;
-  height: auto;
-  object-fit: contain;
-  margin-top: 1rem;
-  border-radius: 0 0 10px 10px;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 1rem;
 }
-
-.modal-list {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-  text-align: left;
-  margin-top: 1.5rem;
-}
-
-.modal-list li {
-  margin-bottom: 0.5rem;
-}
-

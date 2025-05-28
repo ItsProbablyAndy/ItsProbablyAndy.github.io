@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("modal");
   const modalTitle = document.getElementById("modal-title");
@@ -7,18 +8,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".play-box").forEach(box => {
     box.addEventListener("click", () => {
-      const title = box.getAttribute("data-title") || "Untitled";
-      const developer = box.getAttribute("data-developer") || "Unknown";
-      const publisher = box.getAttribute("data-publisher") || "Unknown";
-      const date = box.getAttribute("data-date") || "N/A";
-      const site = box.getAttribute("data-site") || "#";
-      const description = box.getAttribute("data-description") || "";
-
-      const imageUrl = box.style.backgroundImage.slice(5, -2); // Remove `url("...")`
+      const title = box.dataset.title;
+      const imageUrl = box.style.backgroundImage.slice(5, -2);
+      const developer = box.dataset.developer;
+      const publisher = box.dataset.publisher;
+      const date = box.dataset.date;
+      const site = box.dataset.site;
+      const description = box.dataset.description;
 
       modalTitle.textContent = title;
       modalImage.src = imageUrl;
-
       modalInfo.innerHTML = `
         <li><strong>Developer:</strong> ${developer}</li>
         <li><strong>Publisher:</strong> ${publisher}</li>
@@ -42,8 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const hamburger = document.querySelector(".hamburger");
-  const navMenu = document.querySelector("nav");
+  const nav = document.querySelector("nav");
+
   hamburger.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
+    nav.classList.toggle("active");
   });
 });
