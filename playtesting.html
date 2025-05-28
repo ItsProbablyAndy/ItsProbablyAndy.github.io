@@ -24,28 +24,36 @@
   </nav>
 
   <main>
-    <div class="playtesting-grid">
-      <div
-        class="play-box"
-        style="background-image: url('https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/3419620/header.jpg');"
-        data-title="Fear the Spotlight"
-        data-description="A creepy school horror game where you investigate a haunting in the drama department.">
-      </div>
+    <div class="play-box"
+     style="background-image: url('game1.jpg');"
+     data-title="Fear the Spotlight"
+     data-description="Haunting investigation in a dark school."
+     data-developer="Cozy Game Pals"
+     data-publisher="Cozy Game Pals"
+     data-date="May 2025"
+     data-site="https://cozygamepals.itch.io/fear-the-spotlight">
+</div>
 
-      <div
-        class="play-box"
-        style="background-image: url('game2.jpg');"
-        data-title="Game 2"
-        data-description="Description and feedback about Game 2.">
-      </div>
+<div class="play-box"
+     style="background-image: url('game2.jpg');"
+     data-title="Game 2"
+     data-description="A high-speed sci-fi shooter."
+     data-developer="Rocket Devs"
+     data-publisher="Jetstream Games"
+     data-date="April 2025"
+     data-site="https://example.com/game2">
+</div>
 
-      <div
-        class="play-box"
-        style="background-image: url('game3.jpg');"
-        data-title="Game 3"
-        data-description="Testing notes and feedback details for Game 3.">
-      </div>
-    </div>
+<div class="play-box"
+     style="background-image: url('game3.jpg');"
+     data-title="Game 3"
+     data-description="Puzzle-solving under pressure."
+     data-developer="BrainBox Studios"
+     data-publisher="LogicGate"
+     data-date="March 2025"
+     data-site="https://example.com/game3">
+</div>
+
   </main>
 
   <footer>
@@ -58,12 +66,12 @@
   </footer>
 
   <div id="modal" class="modal hidden">
-    <div class="modal-content">
-      <img id="modal-image" src="" alt="Game banner" class="modal-banner" />
-      <span id="modal-close">&times;</span>
-      <h2 id="modal-title"></h2>
-      <p id="modal-description"></p>
-    </div>
+  <div class="modal-content">
+    <span id="modal-close">&times;</span>
+    <h2 id="modal-title"></h2>
+    <img id="modal-image" src="" alt="Game banner" class="modal-banner" />
+    <ul id="modal-info" class="modal-list"></ul>
   </div>
+</div>
 </body>
 </html>
