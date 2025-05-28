@@ -47,3 +47,49 @@ document.addEventListener("DOMContentLoaded", () => {
     nav.classList.toggle("active");
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form");
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const scriptURL = form.querySelector("input[name='form_url']").value;
+      const formData = new FormData(form);
+
+      fetch(scriptURL, {
+        method: "POST",
+        body: formData
+      })
+        .then(response => {
+          showThankYouModal();
+          form.reset();
+        })
+        .catch(error => {
+          alert("There was an error sending your message.");
+          console.error(error);
+        });
+    });
+  }
+
+  function showThankYouModal() {
+    const modal = document.createElement("div");
+    modal.innerHTML = `
+      <div style="
+        position:fixed;top:0;left:0;width:100%;height:100%;
+        background:rgba(0,0,0,0.85);display:flex;
+        justify-content:center;align-items:center;z-index:9999;">
+        <div style="
+          background:#2a2a2a;color:white;padding:2em;
+          border-radius:10px;text-align:center;">
+          <h2>Thank you!</h2>
+          <p>Your message has been sent. Redirecting…</p>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    setTimeout(() => {
+      window.location.href = "https://itsprobablyandy.github.io/about.html";
+    }, 3000);
+  }
+});
