@@ -1,0 +1,267 @@
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: white;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 1em;
+  background-color: #1f1f1f;
+  flex-wrap: wrap;
+  transition: max-height 0.3s ease;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #00aaff;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 1em;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  nav.active {
+    max-height: 300px;
+  }
+
+  .hamburger {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.landing-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.landing-box {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Push content to bottom */
+  background-size: cover;
+  background-position: center;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.landing-box:hover {
+  transform: scale(1.02);
+}
+
+.landing-box span {
+  width: 100%; /* Full width of the box */
+  background: rgba(0, 0, 0, 0.6); /* Transparent black background */
+  padding: 1em;
+  font-size: 1.5em;
+  color: white;
+  text-align: center;
+}
+
+
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  background: #111;
+  align-items: center;
+}
+
+footer a {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+footer a:hover {
+  transform: scale(1.2);
+}
+
+footer i.fa-twitter {
+  font-size: 32px;
+}
+
+footer img.bluesky-icon {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.playtesting-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  padding: 2em;
+}
+
+@media (max-width: 900px) {
+  .playtesting-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .playtesting-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.play-box {
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 460 / 215;
+  cursor: pointer;
+  transition: transform 0.3s;
+  border: 2px solid #333;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #1f1f1f;
+  color: white;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  border-radius: 10px;
+  position: relative;
+  text-align: left;
+}
+
+.modal-list {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+#modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.modal-banner {
+  display: block;
+  width: 100%;
+  aspect-ratio: 460 / 215;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 1rem;
+}
+
+.about-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  padding: 2em;
+  justify-content: space-around;
+}
+
+.about-box, .contact-box {
+  flex: 1;
+  min-width: 300px;
+  background: #2a2a2a;
+  padding: 2em;
+  border-radius: 8px;
+}
+
+.contact-box input,
+.contact-box textarea {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  background: #1f1f1f;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 4px;
+}
+
+.contact-box button {
+  background: #00aaff;
+  color: white;
+  padding: 0.7em 1.5em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.contact-box button:hover {
+  background: #008fcc;
+}
+
+.projects, .writing {
+  padding: 2em;
+}
+
+.project-box, .writing-box {
+  display: flex;
+  flex-wrap: wrap;
+  background: #2a2a2a;
+  margin-bottom: 1em;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.project-box img, .writing-box img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: cover;
+}
+
+.project-info, .writing-info {
+  padding: 1em;
+  flex: 1;
+}
