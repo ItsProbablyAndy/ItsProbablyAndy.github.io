@@ -198,3 +198,43 @@ footer img.bluesky-icon {
   border-radius: 10px 10px 0 0;
   margin-bottom: 1rem;
 }
+
+.about-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  padding: 2em;
+  justify-content: space-around;
+}
+
+.about-box, .contact-box {
+  flex: 1;
+  min-width: 300px;
+  background: #2a2a2a;
+  padding: 2em;
+  border-radius: 8px;
+}
+
+.contact-box input,
+.contact-box textarea {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  background: #1f1f1f;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 4px;
+}
+
+.contact-box button {
+  background: #00aaff;
+  color: white;
+  padding: 0.7em 1.5em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.contact-box button:hover {
+  background: #008fcc;
+}
