@@ -238,3 +238,28 @@ footer img.bluesky-icon {
 .contact-box button:hover {
   background: #008fcc;
 }
+
+.projects, .writing {
+  padding: 2em;
+}
+
+.project-box, .writing-box {
+  display: flex;
+  flex-wrap: wrap;
+  background: #2a2a2a;
+  margin-bottom: 1em;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.project-box img, .writing-box img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: cover;
+}
+
+.project-info, .writing-info {
+  padding: 1em;
+  flex: 1;
+}
