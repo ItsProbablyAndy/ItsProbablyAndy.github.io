@@ -173,7 +173,13 @@ footer img.bluesky-icon {
   width: 90%;
   border-radius: 10px;
   position: relative;
-  text-align: center;
+  text-align: left;
+}
+
+.modal-list {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin-bottom: 0.5em;
 }
 
 #modal-close {
