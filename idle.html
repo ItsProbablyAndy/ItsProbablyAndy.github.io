@@ -3,20 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Clicker Game</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script defer src="idlescript.js"></script>
   <link rel="stylesheet" href="idlestyle.css">
 </head>
 <body>
-
-  <div id="auth-section">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <button id="signup">Sign Up</button>
-    <button id="login">Log In</button>
-    <button id="logout" style="display:none;">Log Out</button>
-  </div>
-
   <button onclick="saveGame()">Save Game</button>
 
   <h1>Gold Clicker</h1>
@@ -28,8 +17,11 @@
   <div id="click-power-display">Gold per Click: 1</div>
   <button id="passive-upgrade-button">Upgrade Passive Income (Cost: 25 Gold)</button>
   <div id="passive-income-display">Gold per Second: 0</div>
-  <br><br>
+  <br>
+  <br>
   <button id="reset-button">Reset Game</button>
 
+
+  <script src="idlescript.js"></script>
 </body>
 </html>
