@@ -15,22 +15,31 @@ function loadGame() {
     upgradeCost = gameData.upgradeCost || 10;
     goldPerSecond = gameData.goldPerSecond || 0;
     passiveUpgradeCost = gameData.passiveUpgradeCost || 25;
+
+    const lastSaved = gameData.lastSaved || Date.now();
+    const timeAway = Math.floor((Date.now() - lastSaved) / 1000); // in seconds
+    const offlineEarnings = timeAway * (goldPerSecond / 2);
+    if (offlineEarnings > 0) {
+      alert(`Welcome back! You earned ${offlineEarnings} gold while you were away at a rate of 0.5 your online rate.`);
+      gold += offlineEarnings;
+    }
   }
 }
 
-// Save game
+// Save game state
 function saveGame() {
   const gameData = {
     gold: gold,
     clickPower: clickPower,
     upgradeCost: upgradeCost,
     goldPerSecond: goldPerSecond,
-    passiveUpgradeCost: passiveUpgradeCost
+    passiveUpgradeCost: passiveUpgradeCost,
+    lastSaved: Date.now()
   };
   localStorage.setItem("clickerSave", JSON.stringify(gameData));
 }
 
-// DOM elements
+// Get DOM elements
 const goldDisplay = document.getElementById("gold-display");
 const clickButton = document.getElementById("click-button");
 const upgradeButton = document.getElementById("upgrade-button");
@@ -38,17 +47,17 @@ const clickPowerDisplay = document.getElementById("click-power-display");
 const passiveUpgradeButton = document.getElementById("passive-upgrade-button");
 const passiveIncomeDisplay = document.getElementById("passive-income-display");
 
-// Load game and update UI on startup
+// Load game and update UI
 loadGame();
 updateDisplay();
 
-// Click to earn gold
+// Handle clicking
 clickButton.addEventListener("click", () => {
   gold += clickPower;
   updateDisplay();
 });
 
-// Click upgrade
+// Click power upgrade
 upgradeButton.addEventListener("click", () => {
   if (gold >= upgradeCost) {
     gold -= upgradeCost;
@@ -70,7 +79,7 @@ passiveUpgradeButton.addEventListener("click", () => {
   }
 });
 
-// Update UI
+// Update the display
 function updateDisplay() {
   goldDisplay.textContent = `Gold: ${gold}`;
   clickPowerDisplay.textContent = `Gold per Click: ${clickPower}`;
@@ -80,7 +89,7 @@ function updateDisplay() {
 // Auto-save every 5 seconds
 setInterval(saveGame, 5000);
 
-// Passive income tick every second
+// Add gold every second based on passive income
 setInterval(() => {
   gold += goldPerSecond;
   updateDisplay();
