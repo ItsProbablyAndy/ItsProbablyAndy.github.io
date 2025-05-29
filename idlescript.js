@@ -7,6 +7,7 @@ let goldPerSecond = 1;
 let passiveUpgradeCost = 25;
 
 // DOM elements
+const progressBar = document.getElementById("progress-bar");
 const goldDisplay = document.getElementById("gold-display");
 const clickPowerDisplay = document.getElementById("click-power-display");
 const passiveIncomeDisplay = document.getElementById("passive-income-display");
@@ -14,6 +15,7 @@ const clickButton = document.getElementById("click-button");
 const upgradeButton = document.getElementById("upgrade-button");
 const passiveUpgradeButton = document.getElementById("passive-upgrade-button");
 const resetButton = document.getElementById("reset-button");
+
 
 // Load saved game
 function loadGame() {
@@ -38,6 +40,14 @@ function updateDisplay() {
   upgradeButton.textContent = `Upgrade Click (Cost: ${upgradeCost} Gold)`;
   passiveUpgradeButton.textContent = `Upgrade Passive Income (Cost: ${passiveUpgradeCost} Gold)`;
 }
+
+function startProgressBar() {
+  progressBar.style.width = "0%";
+  setTimeout(() => {
+    progressBar.style.width = "100%";
+  }, 10);
+}
+
 
 // Event Listeners
 clickButton.addEventListener("click", () => {
@@ -72,9 +82,11 @@ resetButton.addEventListener("click", () => {
 
 // Passive gold gain
 setInterval(() => {
+  startProgressBar();
   gold += goldPerSecond;
   updateDisplay();
 }, 1000);
+
 
 // Autosave
 setInterval(saveGame, 5000);
