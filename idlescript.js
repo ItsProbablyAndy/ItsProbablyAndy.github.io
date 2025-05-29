@@ -84,7 +84,10 @@ function updateDisplay() {
   goldDisplay.textContent = `Gold: ${gold}`;
   clickPowerDisplay.textContent = `Gold per Click: ${clickPower}`;
   passiveIncomeDisplay.textContent = `Gold per Second: ${goldPerSecond}`;
+  upgradeButton.textContent = `Upgrade Click (Cost: ${upgradeCost} Gold)`;
+  passiveUpgradeButton.textContent = `Upgrade Passive Income (Cost: ${passiveUpgradeCost} Gold)`;
 }
+
 
 // Auto-save every 5 seconds
 setInterval(saveGame, 5000);
