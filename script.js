@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
           form.reset();
         })
         .catch(error => {
-          alert("Thank you for your message!");
+          alert("There was an error sending your message."); // I genuinely don't know why but emails still send so error is success
           console.error(error);
         });
     });
