@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fantasy Idle Game</title>
+  <script defer src="idlescript.js"></script>
+  <link rel="stylesheet" href="idlestyle.css">
+</head>
+<body>
+
+  <div class="book">
+    <div class="left-page">
+      <div class="stats">
+        <h2>Stats</h2>
+        <div id="gold-display">Gold: 0</div>
+        <div id="click-power-display">Gold per Click: 1</div>
+        <div id="passive-income-display">Gold per Second: 0</div>
+      </div>
+    </div>
+
+    <div class="right-page">
+      <h1>Fantasy Clicker</h1>
+      <div class="click-area">
+        <button id="click-button">Gather Gold</button>
+      </div>
+
+      <div class="upgrade-section">
+        <h2>Click Upgrades</h2>
+        <button id="upgrade-button">Upgrade Click (Cost: 10 Gold)</button>
+      </div>
+
+      <div class="upgrade-section">
+        <h2>Passive Upgrades</h2>
+        <button id="passive-upgrade-button">Upgrade Passive Income (Cost: 25 Gold)</button>
+      </div>
+
+      <div class="controls">
+        <button onclick="saveGame()">Save Game</button>
+        <button id="reset-button">Reset Game</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
