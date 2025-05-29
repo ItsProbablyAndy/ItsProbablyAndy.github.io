@@ -42,10 +42,16 @@ function updateDisplay() {
 }
 
 function startProgressBar() {
+  progressBar.style.transition = "none";
   progressBar.style.width = "0%";
-  setTimeout(() => {
-    progressBar.style.width = "100%";
-  }, 10);
+
+  // Allow style to apply
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      progressBar.style.transition = "width 1s linear";
+      progressBar.style.width = "100%";
+    });
+  });
 }
 
 
