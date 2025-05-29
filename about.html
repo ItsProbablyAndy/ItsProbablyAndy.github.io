@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About & Contact</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-/>
-
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 </head>
 <body>
+  <!-- Hamburger Menu -->
   <div class="hamburger">
     <div></div>
     <div></div>
     <div></div>
   </div>
+
+  <!-- Navigation -->
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About & Contact</a>
@@ -24,36 +26,47 @@
     <a href="projects.html">Projects</a>
     <a href="writing.html">Writing</a>
   </nav>
+
   <main class="about-contact">
+    <!-- About Section -->
     <div class="about-box">
       <h2>About Me</h2>
       <p>[Insert info here]</p>
     </div>
+
+    <!-- Contact Form Section -->
     <div class="contact-box">
-  <h2>Contact Me</h2> 
-<form id="contact-form"> 
-  <label for="name">Name</label>
-  <input type="text" name="name" required>
+      <h2>Contact Me</h2>
+      <form id="contact-form" method="POST"
+        action="https://script.google.com/macros/s/AKfycbwIYf9plU9qmh5HH0tGcaSvbe9mJ1WjxEuZbYHBTEKl_g7O3CzX3eUgXzXzqzB3AMVR/exec">
+        
+        <label for="name">Name</label>
+        <input type="text" name="name" required />
 
-  <label for="email">Email</label>
-  <input type="email" name="email" required>
+        <label for="email">Email</label>
+        <input type="email" name="email" required />
 
-  <label for="message">Message</label>
-  <textarea name="message" required></textarea>
+        <label for="message">Message</label>
+        <textarea name="message" required></textarea>
 
-  <input type="text" name="honeypot" style="display:none">
+        <!-- Honeypot for spam bots -->
+        <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off"/>
 
-  <button type="submit">Send</button>
-</form>
-</div>
+        <button type="submit">Send</button>
+      </form>
+    </div>
   </main>
-    <footer>
-  <a href="https://x.com/ItsProbablyAndy" target="_blank" aria-label="Twitter">
-    <i class="fab fa-twitter fa-2x"></i>
-  </a>
-  <a href="https://bsky.app/profile/itsprobablyandy.bsky.social" target="_blank" aria-label="Bluesky">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Bluesky_Logo.svg" alt="Bluesky" class="bluesky-icon">
-  </a>
+
+  <!-- Footer -->
+  <footer>
+    <a href="https://x.com/ItsProbablyAndy" target="_blank" aria-label="Twitter">
+      <i class="fab fa-twitter fa-2x"></i>
+    </a>
+    <a href="https://bsky.app/profile/itsprobablyandy.bsky.social" target="_blank" aria-label="Bluesky">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Bluesky_Logo.svg" alt="Bluesky" class="bluesky-icon" />
+    </a>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

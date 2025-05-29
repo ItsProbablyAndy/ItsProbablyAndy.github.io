@@ -1,5 +1,5 @@
-
 document.addEventListener("DOMContentLoaded", () => {
+  // ===== PLAYTEST MODAL HANDLER =====
   const modal = document.getElementById("modal");
   const modalTitle = document.getElementById("modal-title");
   const modalImage = document.getElementById("modal-image");
@@ -40,11 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // ===== HAMBURGER MENU =====
   const hamburger = document.querySelector(".hamburger");
   const nav = document.querySelector("nav");
 
-  hamburger.addEventListener("click", () => {
-    nav.classList.toggle("active");
-  });
+  if (hamburger && nav) {
+    hamburger.addEventListener("click", () => {
+      nav.classList.toggle("active");
+    });
+  }
 });
-
