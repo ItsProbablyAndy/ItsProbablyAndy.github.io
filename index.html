@@ -1,36 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-/>
-
+  <meta charset="UTF-8">
+  <title>Clicker Game</title>
+  <link rel="stylesheet" href="idlestyle.css">
 </head>
 <body>
-  <div class="hamburger">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <main class="landing-container">
-    <a class="landing-box" href="about.html" style="background-image: url('landimg1.png');"><span>About & Contact</span></a>
-    <a class="landing-box" href="playtesting.html" style="background-image: url('landimg2.png');"><span>PlayTesting</span></a>
-    <a class="landing-box" href="projects.html" style="background-image: url('landimg3.png');"><span>Projects</span></a>
-    <a class="landing-box" href="writing.html" style="background-image: url('landimg4.png');"><span>Writing</span></a>
-  </main>
-    <footer>
-  <a href="https://x.com/ItsProbablyAndy" target="_blank" aria-label="Twitter">
-    <i class="fab fa-twitter fa-2x"></i>
-  </a>
-  <a href="https://bsky.app/profile/itsprobablyandy.bsky.social" target="_blank" aria-label="Bluesky">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Bluesky_Logo.svg" alt="Bluesky" class="bluesky-icon">
-  </a>
-  </footer>
+  <h1>Gold Clicker</h1>
+  <div id="gold-display">Gold: 0</div>
+  <button id="click-button">Click Me!</button>
+
+  <h2>Upgrades</h2>
+  <button id="upgrade-button">Upgrade Click (Cost: 10 Gold)</button>
+  <div id="click-power-display">Gold per Click: 1</div>
+
+  <script src="idlescript.js"></script>
 </body>
 </html>
