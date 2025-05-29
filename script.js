@@ -1,67 +1,20 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("modal");
-  const modalTitle = document.getElementById("modal-title");
-  const modalImage = document.getElementById("modal-image");
-  const modalInfo = document.getElementById("modal-info");
-  const modalClose = document.getElementById("modal-close");
-
-  document.querySelectorAll(".play-box").forEach(box => {
-    box.addEventListener("click", () => {
-      const title = box.dataset.title;
-      const imageUrl = box.style.backgroundImage.slice(5, -2);
-      const developer = box.dataset.developer;
-      const publisher = box.dataset.publisher;
-      const date = box.dataset.date;
-      const site = box.dataset.site;
-      const description = box.dataset.description;
-
-      modalTitle.textContent = title;
-      modalImage.src = imageUrl;
-      modalInfo.innerHTML = `
-        <li><strong>Developer:</strong> ${developer}</li>
-        <li><strong>Publisher:</strong> ${publisher}</li>
-        <li><strong>Test Date:</strong> ${date}</li>
-        <li><strong>Website:</strong> <a href="${site}" target="_blank">${site}</a></li>
-        <li><strong>Notes:</strong> ${description}</li>
-      `;
-
-      modal.classList.remove("hidden");
-    });
-  });
-
-  modalClose.addEventListener("click", () => {
-    modal.classList.add("hidden");
-  });
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.add("hidden");
-    }
-  });
-
-  const hamburger = document.querySelector(".hamburger");
-  const nav = document.querySelector("nav");
-
-  hamburger.addEventListener("click", () => {
-    nav.classList.toggle("active");
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
+  // Contact form submission
   const form = document.getElementById("contact-form");
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwjBn3ppMnvvSi2JDlwlMqoSXiJwo4w4dyZODDXS44kKO6pjqbOrEGP5KtOaB2rAJzk4g/exec"; // <-- Replace with your own
+
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const scriptURL = form.querySelector("input[name='form_url']").value;
       const formData = new FormData(form);
 
       fetch(scriptURL, {
         method: "POST",
         body: formData
       })
-        .then(response => {
+        .then(response => response.text())
+        .then(() => {
           showThankYouModal();
           form.reset();
         })
@@ -88,8 +41,60 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
     document.body.appendChild(modal);
+
     setTimeout(() => {
       window.location.href = "https://itsprobablyandy.github.io/about.html";
     }, 3000);
+  }
+
+  // Hamburger menu logic
+  const hamburger = document.querySelector(".hamburger");
+  const navMenu = document.querySelector("nav");
+
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
+  }
+
+  // Modal display for playtesting (if present)
+  const modal = document.getElementById("modal");
+  const modalImage = document.getElementById("modal-image");
+  const modalTitle = document.getElementById("modal-title");
+  const modalDescription = document.getElementById("modal-description");
+  const modalClose = document.getElementById("modal-close");
+
+  if (modal && modalImage && modalTitle && modalDescription && modalClose) {
+    document.querySelectorAll(".play-box").forEach(box => {
+      box.addEventListener("click", () => {
+        const image = box.style.backgroundImage.slice(5, -2);
+        const title = box.dataset.title;
+        const description = box.dataset.description;
+
+        modalImage.src = image;
+        modalTitle.textContent = title;
+        modalDescription.innerHTML = `
+          <ul style="text-align: left; list-style: disc; padding-left: 1.5em;">
+            <li><strong>Developer:</strong> [Sample Dev]</li>
+            <li><strong>Publisher:</strong> [Sample Publisher]</li>
+            <li><strong>Test Date:</strong> [Sample Date]</li>
+            <li><strong>Website:</strong> <a href="#" style="color:#00aaff;">View</a></li>
+          </ul>
+          <p style="text-align:left;">${description}</p>
+        `;
+
+        modal.classList.remove("hidden");
+      });
+    });
+
+    modalClose.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
   }
 });
