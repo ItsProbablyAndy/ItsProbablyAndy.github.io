@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
           form.reset();
         })
         .catch(error => {
-          alert("There was an error sending your message.");
+          alert("Thank you for your message!");
           console.error(error);
         });
     });
