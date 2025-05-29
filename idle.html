@@ -3,9 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>Clicker Game</title>
-  <link rel="stylesheet" href="idlestyle.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+   <script src="idlescript.js"></script>
+   <link rel="stylesheet" href="idlestyle.css">
 </head>
 <body>
+
+  <div id="auth-section">
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button id="signup">Sign Up</button>
+  <button id="login">Log In</button>
+  <button id="logout" style="display:none;">Log Out</button>
+</div>
+
+
   <button onclick="saveGame()">Save Game</button>
 
   <h1>Gold Clicker</h1>
@@ -20,7 +32,6 @@
   <br>
   <br>
   <button id="reset-button">Reset Game</button>
-
 
   <script src="idlescript.js"></script>
 </body>
