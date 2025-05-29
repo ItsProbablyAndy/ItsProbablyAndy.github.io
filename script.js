@@ -56,12 +56,21 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const scriptURL = form.querySelector("input[name='form_url']").value;
-      const formData = new FormData(form);
+      // REPLACE THIS with your actual Google Apps Script Web App URL
+      const scriptURL = "https://script.google.com/macros/s/AKfycbzZhGUczkdcU7bOiMp7FdenRJbChAtCWLPspWfDMzAw6_xsUD8moDSPc8b3JiDKD072/exec";
+
+      const formData = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+      };
 
       fetch(scriptURL, {
         method: "POST",
-        body: formData
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json"
+        }
       })
         .then(response => {
           showThankYouModal();

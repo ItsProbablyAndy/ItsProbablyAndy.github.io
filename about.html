@@ -31,22 +31,20 @@
     </div>
     <div class="contact-box">
   <h2>Contact Me</h2> 
-  <form id="contact-form"> 
-    <input type="hidden" name="form_url" value="https://script.google.com/macros/s/AKfycbyU-nNo-lYEEpeDDsZSojM_yIwe5E1XlFX7M4OXGoLjcKItGy4o_R-3aFfDSBv-ElYw/exec">
+<form id="contact-form"> 
+  <label for="name">Name</label>
+  <input type="text" name="name" required>
 
-    <label for="name">Name</label>
-    <input type="text" name="name" required>
+  <label for="email">Email</label>
+  <input type="email" name="email" required>
 
-    <label for="email">Email</label>
-    <input type="email" name="email" required>
+  <label for="message">Message</label>
+  <textarea name="message" required></textarea>
 
-    <label for="message">Message</label>
-    <textarea name="message" required></textarea>
+  <input type="text" name="honeypot" style="display:none">
 
-    <input type="text" name="honeypot" style="display:none">
-
-    <button type="submit">Send</button>
-  </form>
+  <button type="submit">Send</button>
+</form>
 </div>
   </main>
     <footer>
