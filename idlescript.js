@@ -16,14 +16,17 @@ function loadGame() {
     goldPerSecond = gameData.goldPerSecond || 0;
     passiveUpgradeCost = gameData.passiveUpgradeCost || 25;
 
-    const lastSaved = gameData.lastSaved || Date.now();
-    const timeAway = Math.floor((Date.now() - lastSaved) / 1000); // in seconds
-    const offlineEarnings = timeAway * goldPerSecond;
-    if (offlineEarnings > 0) {
-      alert(`Welcome back! You earned ${offlineEarnings} gold while you were away`);
-      gold += offlineEarnings;
+    const maxOfflineSeconds = 86400; // 24 hours in seconds
+    let timeAway = Math.floor((Date.now() - lastSaved) / 1000); // actual time away
+    if (timeAway > maxOfflineSeconds) {
+    timeAway = maxOfflineSeconds;
     }
-  }
+    const offlineEarnings = timeAway * goldPerSecond;
+
+    if (offlineEarnings > 0) {
+  const cappedNotice = timeAway === maxOfflineSeconds ? " (24-hour max)" : "";
+  alert(`Welcome back! You earned ${offlineEarnings} gold while you were away${cappedNotice}.`);
+  gold += offlineEarnings;
 }
 
 // Save game state
