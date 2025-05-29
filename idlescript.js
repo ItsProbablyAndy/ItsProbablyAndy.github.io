@@ -82,6 +82,17 @@ passiveUpgradeButton.addEventListener("click", () => {
   }
 });
 
+const resetButton = document.getElementById("reset-button");
+
+resetButton.addEventListener("click", () => {
+  const confirmReset = confirm("Are you sure you want to reset your game? This cannot be undone.");
+  if (confirmReset) {
+    localStorage.removeItem("clickerSave");
+    location.reload(); // reload the page to restart with default values
+  }
+});
+
+
 // Update the display
 function updateDisplay() {
   goldDisplay.textContent = `Gold: ${gold}`;
