@@ -1,5 +1,5 @@
+
 document.addEventListener("DOMContentLoaded", () => {
-  // ===== PLAYTEST MODAL HANDLER =====
   const modal = document.getElementById("modal");
   const modalTitle = document.getElementById("modal-title");
   const modalImage = document.getElementById("modal-image");
@@ -40,67 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ===== HAMBURGER MENU =====
   const hamburger = document.querySelector(".hamburger");
   const nav = document.querySelector("nav");
 
-  if (hamburger && nav) {
-    hamburger.addEventListener("click", () => {
-      nav.classList.toggle("active");
-    });
-  }
-
-  // ===== CONTACT FORM HANDLER =====
-  const form = document.getElementById("contact-form");
-  if (form) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      // REPLACE THIS with your actual Google Apps Script Web App URL
-      const scriptURL = "https://script.google.com/macros/s/AKfycbzZhGUczkdcU7bOiMp7FdenRJbChAtCWLPspWfDMzAw6_xsUD8moDSPc8b3JiDKD072/exec";
-
-      const formData = {
-        name: form.name.value,
-        email: form.email.value,
-        message: form.message.value
-      };
-
-      fetch(scriptURL, {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-        .then(response => {
-          showThankYouModal();
-          form.reset();
-        })
-        .catch(error => {
-          alert("There was an error sending your message.");
-          console.error(error);
-        });
-    });
-  }
-
-  function showThankYouModal() {
-    const modal = document.createElement("div");
-    modal.innerHTML = `
-      <div style="
-        position:fixed;top:0;left:0;width:100%;height:100%;
-        background:rgba(0,0,0,0.85);display:flex;
-        justify-content:center;align-items:center;z-index:9999;">
-        <div style="
-          background:#2a2a2a;color:white;padding:2em;
-          border-radius:10px;text-align:center;">
-          <h2>Thank you!</h2>
-          <p>Your message has been sent. Redirecting…</p>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(modal);
-    setTimeout(() => {
-      window.location.href = "https://itsprobablyandy.github.io/about.html";
-    }, 3000);
-  }
+  hamburger.addEventListener("click", () => {
+    nav.classList.toggle("active");
+  });
 });
+
