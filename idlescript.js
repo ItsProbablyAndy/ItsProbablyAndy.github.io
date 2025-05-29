@@ -2,7 +2,7 @@
 let gold = 0;
 let clickPower = 1;
 let upgradeCost = 10;
-let goldPerSecond = 0;
+let goldPerSecond = 1;
 let passiveUpgradeCost = 25;
 
 // Load saved game
@@ -18,9 +18,9 @@ function loadGame() {
 
     const lastSaved = gameData.lastSaved || Date.now();
     const timeAway = Math.floor((Date.now() - lastSaved) / 1000); // in seconds
-    const offlineEarnings = timeAway * (goldPerSecond / 2);
+    const offlineEarnings = timeAway * goldPerSecond;
     if (offlineEarnings > 0) {
-      alert(`Welcome back! You earned ${offlineEarnings} gold while you were away at a rate of 0.5 your online rate.`);
+      alert(`Welcome back! You earned ${offlineEarnings} gold while you were away`);
       gold += offlineEarnings;
     }
   }
@@ -73,7 +73,7 @@ passiveUpgradeButton.addEventListener("click", () => {
   if (gold >= passiveUpgradeCost) {
     gold -= passiveUpgradeCost;
     goldPerSecond += 1;
-    passiveUpgradeCost = Math.floor(passiveUpgradeCost * 1.6);
+    passiveUpgradeCost = Math.floor(passiveUpgradeCost * 1.5);
     passiveUpgradeButton.textContent = `Upgrade Passive Income (Cost: ${passiveUpgradeCost} Gold)`;
     updateDisplay();
   }
