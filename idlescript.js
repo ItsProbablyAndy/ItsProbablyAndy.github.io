@@ -13,20 +13,22 @@ function loadGame() {
     gold = gameData.gold || 0;
     clickPower = gameData.clickPower || 1;
     upgradeCost = gameData.upgradeCost || 10;
-    goldPerSecond = gameData.goldPerSecond || 0;
+    goldPerSecond = gameData.goldPerSecond || 1;
     passiveUpgradeCost = gameData.passiveUpgradeCost || 25;
 
-    const maxOfflineSeconds = 86400; // 24 hours in seconds
-    let timeAway = Math.floor((Date.now() - lastSaved) / 1000); // actual time away
+    const lastSaved = gameData.lastSaved || Date.now();
+    const maxOfflineSeconds = 86400; // 24 hours
+    let timeAway = Math.floor((Date.now() - lastSaved) / 1000);
     if (timeAway > maxOfflineSeconds) {
-    timeAway = maxOfflineSeconds;
+      timeAway = maxOfflineSeconds;
     }
     const offlineEarnings = timeAway * goldPerSecond;
-
     if (offlineEarnings > 0) {
-  const cappedNotice = timeAway === maxOfflineSeconds ? " (24-hour max)" : "";
-  alert(`Welcome back! You earned ${offlineEarnings} gold while you were away${cappedNotice}.`);
-  gold += offlineEarnings;
+      const cappedNotice = timeAway === maxOfflineSeconds ? " (24-hour max)" : "";
+      alert(`Welcome back! You earned ${offlineEarnings} gold while you were away${cappedNotice}.`);
+      gold += offlineEarnings;
+    }
+  }
 }
 
 // Save game state
@@ -49,8 +51,9 @@ const upgradeButton = document.getElementById("upgrade-button");
 const clickPowerDisplay = document.getElementById("click-power-display");
 const passiveUpgradeButton = document.getElementById("passive-upgrade-button");
 const passiveIncomeDisplay = document.getElementById("passive-income-display");
+const resetButton = document.getElementById("reset-button");
 
-// Load game and update UI
+// Load game and update UI on page load
 loadGame();
 updateDisplay();
 
@@ -66,7 +69,6 @@ upgradeButton.addEventListener("click", () => {
     gold -= upgradeCost;
     clickPower += 1;
     upgradeCost = Math.floor(upgradeCost * 1.5);
-    upgradeButton.textContent = `Upgrade Click (Cost: ${upgradeCost} Gold)`;
     updateDisplay();
   }
 });
@@ -77,21 +79,18 @@ passiveUpgradeButton.addEventListener("click", () => {
     gold -= passiveUpgradeCost;
     goldPerSecond += 1;
     passiveUpgradeCost = Math.floor(passiveUpgradeCost * 1.5);
-    passiveUpgradeButton.textContent = `Upgrade Passive Income (Cost: ${passiveUpgradeCost} Gold)`;
     updateDisplay();
   }
 });
 
-const resetButton = document.getElementById("reset-button");
-
+// Reset button logic
 resetButton.addEventListener("click", () => {
   const confirmReset = confirm("Are you sure you want to reset your game? This cannot be undone.");
   if (confirmReset) {
     localStorage.removeItem("clickerSave");
-    location.reload(); // reload the page to restart with default values
+    location.reload();
   }
 });
-
 
 // Update the display
 function updateDisplay() {
@@ -102,11 +101,10 @@ function updateDisplay() {
   passiveUpgradeButton.textContent = `Upgrade Passive Income (Cost: ${passiveUpgradeCost} Gold)`;
 }
 
-
 // Auto-save every 5 seconds
 setInterval(saveGame, 5000);
 
-// Add gold every second based on passive income
+// Add passive gold every second
 setInterval(() => {
   gold += goldPerSecond;
   updateDisplay();
