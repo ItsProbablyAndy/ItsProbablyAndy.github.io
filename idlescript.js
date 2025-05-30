@@ -125,18 +125,15 @@ window.onload = () => {
       return;
     }
 
-    const { data, error } = await client.auth.updateUser({
+    const { error } = await client.auth.updateUser({
       password: newPassword
     });
 
     if (error) {
       alert("Password update failed: " + error.message);
     } else {
-      alert("Password updated successfully! You can now log in with your new password.");
-      // Clear the URL and redirect to login
-      window.history.replaceState({}, document.title, window.location.pathname);
-      await client.auth.signOut(); // Sign out to force fresh login
-      showLoginForm();
+      alert("Password updated successfully!");
+      updateAuthUI();
     }
   });
 
@@ -188,69 +185,42 @@ window.onload = () => {
     gameSection.style.display = "none";
   }
 
-  function showGameSection() {
-    authSection.style.display = "none";
-    resetSection.style.display = "none";
-    newPasswordSection.style.display = "none";
-    gameSection.style.display = "block";
-  }
+  async function updateAuthUI() {
+    const { data: { user } } = await client.auth.getUser();
+    currentUser = user;
 
-  async function handlePasswordRecovery() {
+    // Check URL parameters for auth state
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get('access_token');
     const refreshToken = urlParams.get('refresh_token');
     const type = urlParams.get('type');
 
     // Handle password recovery redirect
-    if (type === 'recovery' && accessToken && refreshToken) {
+    if (type === 'recovery' && accessToken) {
       console.log("Password recovery detected");
+      // Set the session with the tokens from URL
+      const { error } = await client.auth.setSession({
+        access_token: accessToken,
+        refresh_token: refreshToken
+      });
       
-      try {
-        // Set the session with the tokens from URL
-        const { data, error } = await client.auth.setSession({
-          access_token: accessToken,
-          refresh_token: refreshToken
-        });
-        
-        if (error) {
-          console.error("Session setup error:", error);
-          alert("There was an error setting up your password recovery session. Please try again.");
-          // Clear URL parameters and show login form
-          window.history.replaceState({}, document.title, window.location.pathname);
-          showLoginForm();
-          return false;
-        } else {
-          console.log("Recovery session established:", data.user);
-          // Clear URL parameters and show password reset form
-          window.history.replaceState({}, document.title, window.location.pathname);
-          showNewPasswordForm();
-          return true;
-        }
-      } catch (err) {
-        console.error("Exception during session setup:", err);
-        alert("There was an error setting up your password recovery session. Please try again.");
-        window.history.replaceState({}, document.title, window.location.pathname);
+      if (error) {
+        console.error("Session setup error:", error);
         showLoginForm();
-        return false;
+      } else {
+        // Clear URL parameters and show password reset form
+        window.history.replaceState({}, document.title, window.location.pathname);
+        showNewPasswordForm();
       }
+      return;
     }
-    return false;
-  }
-
-  async function updateAuthUI() {
-    // First, check if this is a password recovery redirect
-    const isRecoveryRedirect = await handlePasswordRecovery();
-    if (isRecoveryRedirect) {
-      return; // Don't proceed with normal auth flow
-    }
-
-    // Normal auth flow
-    const { data: { user } } = await client.auth.getUser();
-    currentUser = user;
 
     if (user) {
       console.log("User logged in:", user.id);
-      showGameSection();
+      authSection.style.display = "none";
+      resetSection.style.display = "none";
+      newPasswordSection.style.display = "none";
+      gameSection.style.display = "block";
       await loadSave(user.id);
     } else {
       console.log("User logged out");
