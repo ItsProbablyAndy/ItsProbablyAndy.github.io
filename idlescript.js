@@ -123,7 +123,16 @@ window.onload = () => {
     if (!currentUser) return;
 
     try {
-      const { error } = await client
+      console.log("Attempting to save:", {
+        user_id: currentUser.id,
+        gold: gold,
+        click_power: clickPower,
+        gold_per_second: goldPerSecond,
+        upgrade_cost: upgradeCost,
+        passive_upgrade_cost: passiveUpgradeCost
+      });
+
+      const { data, error } = await client
         .from("saves")
         .upsert({
           user_id: currentUser.id,
@@ -135,12 +144,14 @@ window.onload = () => {
         }, { onConflict: 'user_id' });
 
       if (error) {
-        console.error("Save error:", error);
+        console.error("Save error details:", error);
+        console.error("Error message:", error.message);
+        console.error("Error code:", error.code);
       } else {
-        console.log("Game saved successfully");
+        console.log("Game saved successfully:", data);
       }
     } catch (err) {
-      console.error("Save failed:", err);
+      console.error("Save failed with exception:", err);
     }
   }
 
