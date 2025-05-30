@@ -13,6 +13,25 @@
     <input type="password" id="password" placeholder="Password" />
     <button id="signup">Sign Up</button>
     <button id="login">Log In</button>
+    <br><br>
+    <a href="#" id="forgot-password-link">Forgot Password?</a>
+  </div>
+
+  <!-- Password Reset Form (hidden by default) -->
+  <div id="reset-section" style="display: none;">
+    <h2>Reset Password</h2>
+    <input type="email" id="reset-email" placeholder="Enter your email" />
+    <button id="send-reset">Send Reset Link</button>
+    <br><br>
+    <a href="#" id="back-to-login">Back to Login</a>
+  </div>
+
+  <!-- New Password Form (for after clicking reset link) -->
+  <div id="new-password-section" style="display: none;">
+    <h2>Set New Password</h2>
+    <input type="password" id="new-password" placeholder="New Password" />
+    <input type="password" id="confirm-password" placeholder="Confirm New Password" />
+    <button id="update-password">Update Password</button>
   </div>
 
   <div id="game-section" style="display: none;">

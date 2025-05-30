@@ -13,7 +13,18 @@ window.onload = () => {
   const signupBtn = document.getElementById("signup");
   const logoutBtn = document.getElementById("logout");
 
+  // Password recovery elements
+  const forgotPasswordLink = document.getElementById("forgot-password-link");
+  const backToLoginLink = document.getElementById("back-to-login");
+  const resetEmailInput = document.getElementById("reset-email");
+  const sendResetBtn = document.getElementById("send-reset");
+  const newPasswordInput = document.getElementById("new-password");
+  const confirmPasswordInput = document.getElementById("confirm-password");
+  const updatePasswordBtn = document.getElementById("update-password");
+
   const authSection = document.getElementById("auth-section");
+  const resetSection = document.getElementById("reset-section");
+  const newPasswordSection = document.getElementById("new-password-section");
   const gameSection = document.getElementById("game-section");
 
   const goldDisplay = document.getElementById("gold-display");
@@ -62,6 +73,67 @@ window.onload = () => {
     updateAuthUI();
   });
 
+  // Password recovery event listeners
+  forgotPasswordLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    showResetForm();
+  });
+
+  backToLoginLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    showLoginForm();
+  });
+
+  sendResetBtn.addEventListener("click", async () => {
+    const email = resetEmailInput.value;
+    if (!email) {
+      alert("Please enter your email address");
+      return;
+    }
+
+    const { error } = await client.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + window.location.pathname + '?reset=true'
+    });
+
+    if (error) {
+      alert("Password reset failed: " + error.message);
+    } else {
+      alert("Password reset link sent! Check your email.");
+      showLoginForm();
+    }
+  });
+
+  updatePasswordBtn.addEventListener("click", async () => {
+    const newPassword = newPasswordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+
+    if (!newPassword || !confirmPassword) {
+      alert("Please fill in both password fields");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      alert("Passwords don't match");
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      alert("Password must be at least 6 characters long");
+      return;
+    }
+
+    const { error } = await client.auth.updateUser({
+      password: newPassword
+    });
+
+    if (error) {
+      alert("Password update failed: " + error.message);
+    } else {
+      alert("Password updated successfully!");
+      updateAuthUI();
+    }
+  });
+
   clickButton.addEventListener("click", () => {
     gold += clickPower;
     updateDisplay();
@@ -89,19 +161,51 @@ window.onload = () => {
   });
 
   // Functions
+  function showLoginForm() {
+    authSection.style.display = "block";
+    resetSection.style.display = "none";
+    newPasswordSection.style.display = "none";
+    gameSection.style.display = "none";
+  }
+
+  function showResetForm() {
+    authSection.style.display = "none";
+    resetSection.style.display = "block";
+    newPasswordSection.style.display = "none";
+    gameSection.style.display = "none";
+  }
+
+  function showNewPasswordForm() {
+    authSection.style.display = "none";
+    resetSection.style.display = "none";
+    newPasswordSection.style.display = "block";
+    gameSection.style.display = "none";
+  }
+
   async function updateAuthUI() {
     const { data: { user } } = await client.auth.getUser();
     currentUser = user;
 
+    // Check if user came from password reset link
+    const urlParams = new URLSearchParams(window.location.search);
+    const isPasswordReset = urlParams.get('reset') === 'true';
+
+    if (user && isPasswordReset) {
+      console.log("User needs to set new password");
+      showNewPasswordForm();
+      return;
+    }
+
     if (user) {
       console.log("User logged in:", user.id);
       authSection.style.display = "none";
+      resetSection.style.display = "none";
+      newPasswordSection.style.display = "none";
       gameSection.style.display = "block";
       await loadSave(user.id); // Load their save on login/signup
     } else {
       console.log("User logged out");
-      authSection.style.display = "block";
-      gameSection.style.display = "none";
+      showLoginForm();
       // Reset game state when logged out
       gold = 0;
       clickPower = 1;
@@ -127,9 +231,7 @@ window.onload = () => {
         user_id: currentUser.id,
         gold: gold,
         click_power: clickPower,
-        gold_per_second: goldPerSecond,
-        upgrade_cost: upgradeCost,
-        passive_upgrade_cost: passiveUpgradeCost
+        gold_per_second: goldPerSecond
       });
 
       const { data, error } = await client
@@ -138,9 +240,7 @@ window.onload = () => {
           user_id: currentUser.id,
           gold: gold,
           click_power: clickPower,
-          gold_per_second: goldPerSecond,
-          upgrade_cost: upgradeCost,
-          passive_upgrade_cost: passiveUpgradeCost
+          gold_per_second: goldPerSecond
         }, { onConflict: 'user_id' });
 
       if (error) {
@@ -173,8 +273,9 @@ window.onload = () => {
       gold = data.gold || 0;
       clickPower = data.click_power || 1;
       goldPerSecond = data.gold_per_second || 0;
-      upgradeCost = data.upgrade_cost || 10;
-      passiveUpgradeCost = data.passive_upgrade_cost || 25;
+      // Calculate upgrade costs based on current power levels
+      upgradeCost = Math.floor(10 * Math.pow(1.5, clickPower - 1));
+      passiveUpgradeCost = Math.floor(25 * Math.pow(1.5, goldPerSecond));
       
       console.log("Save loaded:", data);
       updateDisplay();
