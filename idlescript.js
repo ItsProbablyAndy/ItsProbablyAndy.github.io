@@ -1,42 +1,5 @@
-
-let currentUser;
-let client;
-
-// Handle recovery flow before window.onload
-const params = new URLSearchParams(window.location.search);
-const type = params.get("type");
-const accessToken = params.get("access_token");
-const refreshToken = params.get("refresh_token");
-
-if (type === "recovery") {
-  window.addEventListener("load", async () => {
-    client = supabase.createClient(
-      'https://qmitegmbidwxvyimfdaf.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFtaXRlZ21iaWR3eHZ5aW1mZGFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1NTc1MzcsImV4cCI6MjA2NDEzMzUzN30.tdcNNzzEIcPDN0j_mjfbBdeQ4rw0BpSLc0C0t4Aad-s'
-    );
-
-    if (accessToken && refreshToken) {
-      const { error } = await client.auth.setSession({
-        access_token: accessToken,
-        refresh_token: refreshToken
-      });
-
-      if (error) {
-        console.error("Session restore failed:", error.message);
-        return;
-      }
-
-      // Clean up URL
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-
-    document.getElementById("auth-section").style.display = "none";
-    document.getElementById("reset-section").style.display = "none";
-    document.getElementById("new-password-section").style.display = "block";
-    document.getElementById("game-section").style.display = "none";
-  });
-} else {
-  window.addEventListener("load", () => {
+let currentUser; // Global variable to track the logged-in user
+let client; // Global client variable
 
 window.onload = () => {
   client = supabase.createClient(
@@ -359,5 +322,3 @@ window.onload = () => {
   // Initialize auth state
   updateAuthUI();
 };
-});
-}
