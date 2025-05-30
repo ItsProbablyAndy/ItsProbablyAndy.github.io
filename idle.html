@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fantasy Idle Game</title>
+  <link rel="stylesheet" href="idlestyle.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div id="auth-section">
+    <h2>Login or Sign Up</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="signup">Sign Up</button>
+    <button id="login">Log In</button>
+  </div>
+
+  <div id="game-section" style="display: none;">
+    <h2 id="gold-display">Gold: 0</h2>
+    <div id="click-power-display">Gold per Click: 1</div>
+    <div id="passive-income-display">Gold per Second: 0</div>
+    <button id="click-button">Click</button>
+    <button id="upgrade-button">Upgrade Click (Cost: 10 Gold)</button>
+    <button id="passive-upgrade-button">Upgrade Passive Income (Cost: 25 Gold)</button>
+    <br /><br />
+    <button id="logout">Log Out</button>
+  </div>
+
+  <script src="idlescript.js"></script>
+</body>
+</html>
