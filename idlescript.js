@@ -91,17 +91,14 @@ window.onload = () => {
       return;
     }
 
-    // Use your actual domain/localhost URL here
-    const redirectURL = window.location.origin + window.location.pathname;
-    
     const { error } = await client.auth.resetPasswordForEmail(email, {
-      redirectTo: redirectURL
+      redirectTo: window.location.origin + window.location.pathname + '?reset=true'
     });
 
     if (error) {
       alert("Password reset failed: " + error.message);
     } else {
-      alert("Password reset link sent! Check your email and click the link to return here.");
+      alert("Password reset link sent! Check your email.");
       showLoginForm();
     }
   });
@@ -189,29 +186,13 @@ window.onload = () => {
     const { data: { user } } = await client.auth.getUser();
     currentUser = user;
 
-    // Check URL parameters for auth state
+    // Check if user came from password reset link
     const urlParams = new URLSearchParams(window.location.search);
-    const accessToken = urlParams.get('access_token');
-    const refreshToken = urlParams.get('refresh_token');
-    const type = urlParams.get('type');
+    const isPasswordReset = urlParams.get('reset') === 'true';
 
-    // Handle password recovery redirect
-    if (type === 'recovery' && accessToken) {
-      console.log("Password recovery detected");
-      // Set the session with the tokens from URL
-      const { error } = await client.auth.setSession({
-        access_token: accessToken,
-        refresh_token: refreshToken
-      });
-      
-      if (error) {
-        console.error("Session setup error:", error);
-        showLoginForm();
-      } else {
-        // Clear URL parameters and show password reset form
-        window.history.replaceState({}, document.title, window.location.pathname);
-        showNewPasswordForm();
-      }
+    if (user && isPasswordReset) {
+      console.log("User needs to set new password");
+      showNewPasswordForm();
       return;
     }
 
@@ -221,7 +202,7 @@ window.onload = () => {
       resetSection.style.display = "none";
       newPasswordSection.style.display = "none";
       gameSection.style.display = "block";
-      await loadSave(user.id);
+      await loadSave(user.id); // Load their save on login/signup
     } else {
       console.log("User logged out");
       showLoginForm();
