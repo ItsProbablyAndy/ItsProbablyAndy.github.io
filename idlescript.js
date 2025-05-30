@@ -106,7 +106,7 @@ async function saveGameToSupabase() {
   const { data: { user } } = await client.auth.getUser();
   if (!user) return;
 
-  const { error } = await supabase
+  const { error } = await client
     .from("saves")
     .upsert({
       user_id: user.id,
@@ -119,7 +119,7 @@ async function saveGameToSupabase() {
 }
 
 async function loadSave(userId) {
-  const { data, error } = await supabase
+  const { data, error } = await client
     .from("saves")
     .select("*")
     .eq("user_id", userId)
