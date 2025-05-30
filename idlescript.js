@@ -1,3 +1,4 @@
+let currentUser; // Global variable to track the logged-in user
 
 window.onload = () => {
   const client = supabase.createClient(
@@ -55,10 +56,12 @@ logoutBtn.addEventListener("click", async () => {
 
 async function updateAuthUI() {
   const { data: { user } } = await client.auth.getUser();
+  currentUser = user;
+
   if (user) {
     authSection.style.display = "none";
     gameSection.style.display = "block";
-    await loadSave(user.id);
+    await loadSave(user.id); // ⬅ Load their save on login/signup
   } else {
     authSection.style.display = "block";
     gameSection.style.display = "none";
@@ -96,11 +99,11 @@ passiveUpgradeButton.addEventListener("click", () => {
   }
 });
 
-setInterval(() => {
+if (currentUser) {
   gold += goldPerSecond;
+  saveGameToSupabase(currentUser.id);
   updateDisplay();
-  saveGameToSupabase();
-}, 1000);
+}
 
 async function saveGameToSupabase() {
   const { data: { user } } = await client.auth.getUser();
