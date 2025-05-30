@@ -133,6 +133,7 @@ window.onload = () => {
       alert("Password update failed: " + error.message);
     } else {
       alert("Password updated successfully!");
+      window.location.href = window.location.origin + window.location.pathname;
       updateAuthUI();
     }
   });
