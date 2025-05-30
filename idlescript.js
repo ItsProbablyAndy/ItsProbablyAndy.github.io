@@ -125,15 +125,18 @@ window.onload = () => {
       return;
     }
 
-    const { error } = await client.auth.updateUser({
+    const { data, error } = await client.auth.updateUser({
       password: newPassword
     });
 
     if (error) {
       alert("Password update failed: " + error.message);
     } else {
-      alert("Password updated successfully!");
-      updateAuthUI();
+      alert("Password updated successfully! You can now log in with your new password.");
+      // Clear the URL and redirect to login
+      window.history.replaceState({}, document.title, window.location.pathname);
+      await client.auth.signOut(); // Sign out to force fresh login
+      showLoginForm();
     }
   });
 
