@@ -122,6 +122,37 @@ footer img.bluesky-icon {
   display: block;
 }
 
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 3px solid #000;
+  border-radius: 12px;
+  float: left;
+  margin: 0 1.5em 1em 0;
+  display: block;
+}
+
+/* Optional: Add a subtle shadow for depth */
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 3px solid #000;
+  border-radius: 12px;
+  float: left;
+  margin: 0 1.5em 1em 0;
+  display: block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Clear float after the about-box to prevent layout issues */
+.about-box::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .playtesting-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
