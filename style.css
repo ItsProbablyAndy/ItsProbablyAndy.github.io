@@ -153,6 +153,19 @@ footer img.bluesky-icon {
   clear: both;
 }
 
+/* Style for links within the about section */
+.about-box a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.about-box a:hover {
+  color: #cccccc;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 .playtesting-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
