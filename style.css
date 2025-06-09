@@ -166,7 +166,7 @@ footer img.bluesky-icon {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Update the existing writing box styles */
+/* Update the writing box to have uniform height */
 .writing-box {
   display: flex;
   flex-wrap: wrap;
@@ -174,52 +174,52 @@ footer img.bluesky-icon {
   margin-bottom: 1em;
   border-radius: 8px;
   overflow: hidden;
-  align-items: center; /* Center align items vertically */
-  min-height: 120px; /* Set a smaller minimum height */
+  align-items: stretch; /* Make all child elements same height */
+  height: 160px; /* Fixed height for uniformity */
 }
 
 .writing-box img {
   width: 100%;
   max-width: 200px;
-  height: 120px;
+  height: 100%; /* Take full height of container */
   object-fit: cover;
   flex-shrink: 0;
-  box-sizing: border-box; /* Add this to all writing box images */
+  box-sizing: border-box;
 }
 
 .writing-info {
   padding: 1em;
   flex: 1;
-  min-width: 250px; /* Minimum width before wrapping */
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
 }
 
 .writing-info h3 {
-  margin: 0 0 0.5em 0; /* Reduce spacing around heading */
+  margin: 0 0 0.5em 0;
   font-size: 1.2em;
 }
 
 .writing-info p {
-  margin: 0; /* Remove default paragraph margins */
-  line-height: 1.4; /* Slightly tighter line spacing */
-}
-
-/* Add white background to Heterotopias logo specifically */
-.writing-box img[alt="Heterotopias"] {
-  background-color: white;
-  padding: 15px; /* Adds some padding around the logo */
-  border-radius: 8px; /* Optional: rounds the corners to match your design */
+  margin: 0;
+  line-height: 1.4;
 }
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .writing-box {
     flex-direction: column;
-    min-height: auto;
+    height: auto; /* Allow natural height on mobile */
   }
   
   .writing-box img {
     max-width: 100%;
-    height: 150px;
+    height: 150px; /* Fixed height for mobile */
+  }
+  
+  .writing-info {
+    justify-content: flex-start; /* Reset alignment for mobile */
   }
 }
 
