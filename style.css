@@ -202,6 +202,13 @@ footer img.bluesky-icon {
   line-height: 1.4; /* Slightly tighter line spacing */
 }
 
+/* Add white background to Heterotopias logo specifically */
+.writing-box img[alt="Heterotopias"] {
+  background-color: white;
+  padding: 15px; /* Adds some padding around the logo */
+  border-radius: 8px; /* Optional: rounds the corners to match your design */
+}
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .writing-box {
